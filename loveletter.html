@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Love Letter ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      font-family: 'Georgia', serif;
+    }
+
+    .letter {
+      background: #fff8f0;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+      max-width: 700px;
+      text-align: left;
+      position: relative;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .letter h1 {
+      font-family: 'Brush Script MT', cursive;
+      font-size: 36px;
+      color: #d6336c;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .typewriter {
+      font-size: 20px;
+      color: #444;
+      line-height: 1.8;
+      white-space: pre-wrap;
+      border-right: 2px solid #d6336c;
+      animation: caret 0.7s infinite;
+    }
+
+    @keyframes caret {
+      50% { border-color: transparent; }
+    }
+
+    .signature {
+      margin-top: 30px;
+      font-size: 22px;
+      color: #d6336c;
+      font-weight: bold;
+      text-align: right;
+      font-family: 'Brush Script MT', cursive;
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: absolute;
+      bottom: -50px;
+      color: #ff4d6d;
+      font-size: 24px;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 0.7; }
+      100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .back-btn {
+      display: block;
+      margin: 20px auto 0;
+      padding: 12px 24px;
+      background: #d6336c;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 18px;
+      transition: background 0.3s;
+    }
+
+    .back-btn:hover {
+      background: #a61e4d;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="letter">
+    <h1>To Mine Shiruuu❤️</h1>
+    <div id="loveText" class="typewriter"></div>
+    <div class="signature">Forever Yours,<br> Pratham ~</div>
+    <a href="home.html" class="back-btn">⬅ Back to Memories</a>
+  </div>
+
+  <!-- Hearts -->
+  <script>
+    // Typewriter effect
+    const text = `My Dearest Shiruuuu 💗,\n\nOn this special day, I just want to remind you how much you mean to me.\nYou are the reason behind my happiest smiles, my strongest hopes, and my sweetest dreams.\n\nEvery moment spent with you is a memory I cherish forever. 🌹\n\nI may not be with you right now, but my heart is, always and forever.\n\nHappy Birthday, my love. 🥰\n\n`;
+    let i = 0;
+    const speed = 50;
+    function typeWriter() {
+      if (i < text.length) {
+        document.getElementById("loveText").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, speed);
+      }
+    }
+    typeWriter();
+
+    // Floating hearts generator
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 20 + 15 + "px";
+      heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => { heart.remove(); }, 6000);
+    }
+    setInterval(createHeart, 500);
+  </script>
+
+</body>
+</html>

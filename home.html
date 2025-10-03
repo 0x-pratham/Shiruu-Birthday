@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Happy Birthday — Surprise</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg1:#ffd1e6;
+      --bg2:#ffe6d6;
+      --accent:#6e1b5a;
+      --muted:#6b6b6b;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      background:linear-gradient(135deg,var(--bg1),var(--bg2));
+      font-family:Montserrat,Arial,sans-serif;
+      overflow-x:hidden;
+      position:relative;
+      min-height:100vh;
+    }
+    .container{max-width:1000px;margin:0 auto;padding:24px;text-align:center}
+    header .logo{font-size:60px}
+    header h1{font-family:'Playfair Display';color:var(--accent);margin:10px 0}
+    header p{color:var(--muted)}
+
+    .countdown{display:flex;gap:20px;justify-content:center;margin:30px 0}
+    .countdown .num{font-size:28px;font-weight:700;color:var(--accent)}
+    .countdown .label{font-size:12px;color:var(--muted)}
+
+    .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+    .gallery .card{background:#fff;border-radius:12px;overflow:hidden;text-align:center;padding:6px}
+    .gallery img{width:100%;height:auto;max-height:220px;object-fit:contain;background:#fafafa;cursor:pointer}
+    .gallery p{margin:6px 0 0;font-size:13px;color:var(--muted)}
+
+    .message{background:rgba(255,255,255,0.8);padding:20px;border-radius:14px;margin-top:20px;text-align:center}
+    .message h2{font-family:'Playfair Display';color:var(--accent)}
+    .typed{margin-top:12px;color:var(--accent);font-style:italic;font-size:18px}
+
+    .memories{margin-top:40px;text-align:left}
+    .memories h2{font-family:'Playfair Display';color:var(--accent);text-align:center;margin-bottom:20px}
+    .memory-item{background:rgba(255,255,255,0.7);padding:16px;border-radius:12px;margin-bottom:14px;display:flex;gap:14px;align-items:center}
+    .memory-item img{width:120px;height:auto;border-radius:10px;object-fit:contain;background:#fff}
+    .memory-item p{margin:0;font-size:14px;color:#333}
+
+    /* Love Letter Button */
+    .love-btn {
+      display: inline-block;
+      margin: 30px auto;
+      padding: 14px 28px;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 30px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .love-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      background: linear-gradient(135deg, #ff4d6d, #ff758c);
+    }
+
+    footer{margin:30px 0;text-align:center;color:var(--muted);font-size:13px}
+
+    /* 🎈 Floating hearts */
+    .heart{
+      position:fixed;
+      bottom:-20px;
+      font-size:24px;
+      animation: floatUp 6s linear infinite;
+      opacity:0.8;
+    }
+    @keyframes floatUp{
+      0%{transform:translateY(0) scale(1);opacity:1}
+      100%{transform:translateY(-100vh) scale(1.5);opacity:0}
+    }
+
+    /* 🎉 Confetti */
+    .confetti{
+      position:fixed;
+      width:8px;
+      height:14px;
+      background:red;
+      top:-10px;
+      animation:fall linear forwards;
+      opacity:0.8;
+    }
+    @keyframes fall{
+      to{transform:translateY(110vh) rotate(360deg);}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">🎂</div>
+      <h1>Happy 20th Birthday, Majha Shiryaaa💗🦋</h1>
+      <p>Baby girl, finally stepping into the big 20 💕🥳 a whole new chapter full of dreams, happiness,
+         and endless success waiting for you! 🌸💫</p>
+    </header>
+
+    <div class="countdown" id="countdown"></div>
+
+    <div class="gallery">
+      <div class="card"><img src="Images/img1.jpg"><p>Majha Chota Radhkuu Baal😙🦋</p></div>
+      <div class="card"><img src="Images/img2.jpg"><p>Majha Cartoon💋🐼</p></div>
+      <div class="card"><img src="Images/img24.jpg"><p>Us💏💗</p></div>
+      <!-- Add more photos -->
+    </div>
+
+    <div class="message">
+      <h2>Wish You Many Many Happy Return's Of The Day Bayko💗💏</h2>
+      <div class="typed" id="typed"></div>
+    </div>
+
+    <div class="memories">
+      <h2>Our Memories Together ❤️</h2>
+      <div class="memory-item">
+        <img src="Images/img4.jpg">
+        <p>Have You Remember the hardest good bye, and the early morning photoshoot at metro station.</p>
+      </div>
+      <div class="memory-item">
+        <img src="Images/img16.jpg">
+        <p>That silly selfie day where we couldn’t stop laughing, my favorite kind of day with you.</p>
+      </div>
+    </div>
+
+    <!-- 💌 Love Letter Button (No auto redirect, she clicks to read) -->
+    <a href="loveletter.html" class="love-btn">💌 Read My Love Letter</a>
+
+    <footer>Made with ❤️ just for you by Your Mr. Pirateee </footer>
+  </div>
+
+  <script>
+    // Countdown
+    const targetDate=new Date("2025-10-04T00:00:00").getTime();
+    setInterval(()=>{
+      const now=new Date().getTime();
+      const diff=targetDate-now;
+      if(diff<0){document.getElementById('countdown').innerHTML="It's Your Day 🎉";return;}
+      const d=Math.floor(diff/(1000*60*60*24));
+      const h=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+      const m=Math.floor((diff%(1000*60*60))/(1000*60));
+      const s=Math.floor((diff%(1000*60))/1000);
+      document.getElementById('countdown').innerHTML=
+        `<div><div class='num'>${d}</div><div class='label'>Days</div></div>
+         <div><div class='num'>${h}</div><div class='label'>Hours</div></div>
+         <div><div class='num'>${m}</div><div class='label'>Mins</div></div>
+         <div><div class='num'>${s}</div><div class='label'>Secs</div></div>`;
+    },1000);
+
+    // Typewriter
+    const msg="You’re the brightest star in my sky 🌟, the cutest soul 😘, and my forever Pillyaa 🐣💞. I’m so blessed to have you, my sunshine ☀️💖. May God shower you with love, laughter, success, and everything you’ve ever wished for 🎁🎂💝. Cheers to endless smiles 😍, crazy memories 🤪, and many more birthdays together 💍💖. Happiest birthday once again, mine baby girl 💕🎂🥳 I love you infinity ♾️❤️";
+    let i=0;
+    function typeWriter(){
+      if(i<msg.length){
+        document.getElementById('typed').innerHTML+=msg.charAt(i);
+        i++;
+        setTimeout(typeWriter,70);
+      }
+    }
+    typeWriter();
+
+    // Floating hearts
+    function createHeart(){
+      const heart=document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML="❤️";
+      heart.style.left=Math.random()*100+"vw";
+      heart.style.animationDuration=(4+Math.random()*3)+"s";
+      document.body.appendChild(heart);
+      setTimeout(()=>heart.remove(),6000);
+    }
+    setInterval(createHeart,800);
+
+    // Confetti
+    function createConfetti(){
+      const conf=document.createElement("div");
+      conf.classList.add("confetti");
+      conf.style.left=Math.random()*100+"vw";
+      conf.style.background=`hsl(${Math.random()*360},100%,50%)`;
+      conf.style.animationDuration=(2+Math.random()*3)+"s";
+      document.body.appendChild(conf);
+      setTimeout(()=>conf.remove(),5000);
+    }
+    setInterval(createConfetti,200);
+  </script>
+</body>
+</html>

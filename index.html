@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Birthday Riddle Game 💡</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    body{
+      background:linear-gradient(135deg,#ffe6f0,#ffd6e0);
+      font-family:'Montserrat',sans-serif;
+      text-align:center;
+      padding:20px;
+      color:#5a0838;
+      min-height:100vh;
+      transition: all 0.3s;
+    }
+    h1{
+      font-family:'Playfair Display';
+      font-size:34px;
+      margin-bottom:20px;
+    }
+    .riddle-box{
+      background:#fff;
+      padding:20px;
+      margin:20px auto;
+      border-radius:15px;
+      max-width:600px;
+      box-shadow:0 6px 15px rgba(0,0,0,0.2);
+    }
+    .options button{
+      display:block;
+      width:100%;
+      margin:8px 0;
+      padding:12px;
+      border:none;
+      border-radius:10px;
+      background:linear-gradient(135deg,#ff90b3,#ff5f8f);
+      color:white;
+      font-size:16px;
+      cursor:pointer;
+      transition:0.3s;
+    }
+    .options button:hover{transform:scale(1.05);}
+    .hidden{display:none;}
+    .final-msg{
+      font-family:'Playfair Display';
+      font-size:24px;
+      color:#d4145a;
+      margin-top:20px;
+    }
+    .love-btn{
+      display:inline-block;
+      margin-top:20px;
+      padding:12px 25px;
+      background:linear-gradient(135deg,#ff6b9f,#ff3d7a);
+      color:white;
+      text-decoration:none;
+      font-size:18px;
+      border-radius:12px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.2);
+      transition:0.3s;
+    }
+    .love-btn:hover{transform:scale(1.08);}
+    
+    /* hearts floating */
+    .heart{
+      position:fixed;
+      bottom:-20px;
+      font-size:24px;
+      animation: floatUp 6s linear forwards;
+      opacity:0.9;
+    }
+    @keyframes floatUp{
+      0%{transform:translateY(0) scale(1);opacity:1}
+      100%{transform:translateY(-100vh) scale(1.5);opacity:0}
+    }
+    
+    /* Wrong answer shake effect */
+    .shake{
+      animation: shake 0.4s;
+    }
+    @keyframes shake {
+      0% { transform: translateX(0px); }
+      25% { transform: translateX(-8px); }
+      50% { transform: translateX(8px); }
+      75% { transform: translateX(-8px); }
+      100% { transform: translateX(0px); }
+    }
+  </style>
+</head>
+<body>
+  <h1>💡 Solve These Riddles, My Love 💕</h1>
+  <div id="game"></div>
+  <div class="final-msg hidden" id="finalMsg">
+    🎉 Yay! You solved all riddles!  
+    Now go ahead 👉  
+    <br><br>
+    <a href="home.html" class="love-btn">🌸 Continue to the Surprise 🌸</a>
+  </div>
+
+  <script>
+    const riddles=[
+      {
+        q:"I’m something you can’t see, but you feel me in every hug, kiss & smile. What am I?",
+        options:["Air","Love ❤️","Chocolate","Dreams"],
+        correct:"Love ❤️"
+      },
+      {
+        q:"She is the cutest soul ever, my Shiruuuu 💖. By which sweet nickname do I often call her?",
+        options:["Baccha 🍼","Pishtuuu 🐰","Wifey 💍","All of them 😘"],
+        correct:"All of them 😘"
+      },
+      {
+        q:"I’m silly, annoying sometimes, but you can’t live without me. Who am I?",
+        options:["Pratham (Mr. Pirateee) 😎","Bollywood Hero","Pizza","Instagram"],
+        correct:"Pratham (Mr. Pirateee) 😎"
+      },
+      {
+        q:"Every photo we click becomes a memory, every laugh is magic. What is it?",
+        options:["Netflix","Our Memories Together ✨","Dreams","School"],
+        correct:"Our Memories Together ✨"
+      },
+      {
+        q:"I have no wings but I make you fly, no mouth but I make you smile. What am I?",
+        options:["Money","Happiness with You 🌸","Instagram Reels","Coffee"],
+        correct:"Happiness with You 🌸"
+      }
+    ];
+
+    let current=0;
+    const gameDiv=document.getElementById("game");
+
+    function showRiddle(){
+      if(current>=riddles.length){
+        document.getElementById("finalMsg").classList.remove("hidden");
+        return;
+      }
+      const r=riddles[current];
+      gameDiv.innerHTML=`<div class="riddle-box">
+        <h3>${r.q}</h3>
+        <div class="options">
+          ${r.options.map(opt=>`<button onclick="checkAnswer('${opt}')">${opt}</button>`).join('')}
+        </div>
+      </div>`;
+    }
+
+    function checkAnswer(ans){
+      if(ans===riddles[current].correct){
+        // Blast of more hearts when correct
+        for(let i=0;i<15;i++) createHeart();
+        current++;
+        setTimeout(showRiddle,800);
+      } else {
+        // Wrong answer reaction
+        document.body.classList.add("shake");
+        setTimeout(()=>document.body.classList.remove("shake"),400);
+        alert("Awww wrong one Baccha 😘, try again with love 💖!");
+      }
+    }
+
+    function createHeart(){
+      const heart=document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML="❤️";
+      heart.style.left=Math.random()*100+"vw";
+      heart.style.fontSize=(20+Math.random()*20)+"px";
+      heart.style.animationDuration=(3+Math.random()*4)+"s";
+      document.body.appendChild(heart);
+      setTimeout(()=>heart.remove(),6000);
+    }
+
+    showRiddle();
+  </script>
+</body>
+</html>
